@@ -17,6 +17,10 @@ class UiActions:
         button = self.wait.until(EC.element_to_be_clickable(locator))
         button.click()
 
+    def drop_down_select(self, locator, text):
+        field = self.wait.until(EC.visibility_of_element_located(locator))
+        field.send_keys(text)
+
     def is_element_visible(self, locator):
         try:
             self.wait.until(EC.visibility_of_element_located(locator))

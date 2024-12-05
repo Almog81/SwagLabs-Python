@@ -19,8 +19,8 @@ class LoginPage(UiActions):
     btn_submitCrate = (By.ID, "SubmitCreate")
     elm_crateAccountError = (By.CLASS_NAME, "create_account_error")
 
-    def login_action(self, username, password):
-        self.fill_action(self.txt_loginEmail, username)
+    def login_action(self, email, password):
+        self.fill_action(self.txt_loginEmail, email)
         self.fill_action(self.txt_password, password)
         self.click_action(self.btn_login)
 
