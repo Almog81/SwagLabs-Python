@@ -11,9 +11,12 @@ class HomePage(UiActions):
         self.wait = WebDriverWait(driver, 10)
 
     # Locators
-    img_logo = (By.CLASS_NAME, "logo.img-responsive")
-    url_homePage = "http://www.automationpractice.pl/index.php"
-    btn_singIn = (By.CLASS_NAME, "login")
+    img_logo = (By.CLASS_NAME, "logo")
+    url_homePage = "https://magento.softwaretestingboard.com/"
+    btn_singIn = (By.XPATH, "//a[contains(text(), 'Sign In')]")
+    btn_create_user = (By.XPATH, "//a[contains(text(), 'Create an Account')]")
+    elm_loggedIn = (By.CLASS_NAME, "logged-in")
+
 
     # Actions
     def navi_to_homepage(self):
@@ -26,4 +29,15 @@ class HomePage(UiActions):
         self.navi_to_homepage()
         self.click_action(self.btn_singIn)
 
+    def navi_to_create_user(self):
+        self.navi_to_homepage()
+        self.click_action(self.btn_create_user)
 
+    def get_user_name(self):
+        self.wait_for_page_load()
+        self.is_element_visible(self.elm_loggedIn)
+        return self.get_text(self.elm_loggedIn)
+
+    def verify_user_logged_in(self, name):
+        self.wait_for_page_load()
+        assert self.get_user_name() ==  f"Welcome, {name}!", "Login fails"

@@ -1,5 +1,27 @@
-{
-  "name": "Sam One",
-  "email": "user4Test@example.com",
-  "password": "userPassword"
-}
+[
+    {
+        "email": "user4Test@example.com",
+        "password": "!@userPassword1234",
+        "name": "Sam One"
+    },
+    {
+        "email": "userDsf4354Test@example.com",
+        "password": "!@userPassword1234",
+        "name": "John Doe"
+    },
+     {
+        "email": "userA132FHF3Test@example.com",
+        "password": "!@userPassword1234",
+        "name": "Alice Smith"
+    },
+    {
+        "email": "userB5367Test@example.com",
+        "password": "!@userPassword",
+        "name": "Bob Johnson"
+    },
+    {
+        "email": "userC8390Test@example.com",
+        "password": "!@userPassword1234",
+        "name": "Charlie Brown"
+    }
+]
