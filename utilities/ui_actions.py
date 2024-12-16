@@ -2,6 +2,8 @@ from selenium.common import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from utilities.common_ops import driver
+
 
 class UiActions:
     def __init__(self, driver, wait_time=10):
