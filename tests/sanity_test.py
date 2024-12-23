@@ -10,12 +10,12 @@ class TestSanityScenarios:
 
     @pytest.mark.parametrize("login_data", login_data_list)
     def test_login_action(self, pages, login_data):
-        pages.home_page.navi_to_login()
-        pages.login_page.login_action(login_data["email"], login_data["password"])
-        pages.home_page.verify_user_logged_in(login_data["name"])
+        pages.home_page.navi_to_homepage()
+        pages.login_page.login_action(login_data)
+        pages.home_page.verify_user_logged_in()
 
     @pytest.mark.parametrize("user_data", create_data)
     def test_create_user(self, pages, user_data):
         pages.home_page.navi_to_create_user()
         pages.create_user_page.create_user_action(user_data)
-        pages.create_user_page.verify_user_created()
+        pages.home_page.verify_user_logged_in()

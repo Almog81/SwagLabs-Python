@@ -12,10 +12,10 @@ class HomePage(UiActions):
 
     # Locators
     img_logo = (By.CLASS_NAME, "logo")
-    url_homePage = "https://magento.softwaretestingboard.com/"
-    btn_singIn = (By.XPATH, "//a[contains(text(), 'Sign In')]")
-    btn_create_user = (By.XPATH, "//a[contains(text(), 'Create an Account')]")
-    elm_loggedIn = (By.CLASS_NAME, "logged-in")
+    url_homePage = "https://parabank.parasoft.com/"
+    btn_register = (By.XPATH, "//a[contains(text(), 'Register')]")
+    elm_welcome = (By.XPATH, "//*[contains(text(), 'Welcome')]")
+    elm_errorMassage = (By.CLASS_NAME, "error")
 
 
     # Actions
@@ -25,19 +25,15 @@ class HomePage(UiActions):
     def is_logo_displayed(self):
         return self.is_element_visible(self.img_logo)
 
-    def navi_to_login(self):
-        self.navi_to_homepage()
-        self.click_action(self.btn_singIn)
-
     def navi_to_create_user(self):
         self.navi_to_homepage()
-        self.click_action(self.btn_create_user)
+        self.click_action(self.btn_register)
 
     def get_user_name(self):
-        self.wait_for_page_load()
-        self.is_element_visible(self.elm_loggedIn)
-        return self.get_text(self.elm_loggedIn)
+        self.is_element_visible(self.elm_welcome)
+        return self.get_text(self.elm_welcome)
 
-    def verify_user_logged_in(self, name):
+
+    def verify_user_logged_in(self):
         self.wait_for_page_load()
-        assert self.get_user_name() ==  f"Welcome, {name}!", "Login fails"
+        assert self.is_element_visible(self.elm_welcome), f"Login failed: {self.get_text(self.elm_errorMassage)}"
