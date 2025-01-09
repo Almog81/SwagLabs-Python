@@ -1,5 +1,3 @@
-import pytest
-
 from pages.create_user_page import CreateUserPage
 from utilities.common_ops import *
 from pages.home_page import HomePage

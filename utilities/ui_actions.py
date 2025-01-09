@@ -1,7 +1,6 @@
 from selenium.common import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from utilities.common_ops import driver
 
 
@@ -44,3 +43,18 @@ class UiActions:
         self.wait_for_page_load()
         element = self.wait.until(EC.visibility_of_element_located(locator))
         return element.text
+
+    def check_broken_images(self, locator):
+        broken_images = []
+        images = self.driver.find_elements(*locator)
+        for img in images:
+            src = img.get_attribute("src")
+            if not src or "invalid" in src:
+                broken_images.append(img)
+        return broken_images
+
+    def get_page_load_time(self):
+        navigation_start = self.driver.execute_script("return window.performance.timing.navigationStart")
+        load_event_end = self.driver.execute_script("return window.performance.timing.loadEventEnd")
+        load_time = (load_event_end - navigation_start) / 1000  # Convert to seconds
+        return load_time
