@@ -8,6 +8,6 @@ class TestSanityScenarios:
         assert pages.home_page.is_logo_displayed(), "Logo is not displayed"
 
     @pytest.mark.parametrize("login_data", login_data_list)
-    def test_login_action(self, pages, login_data):
+    def test_login_all_type_of_users(self, pages, login_data):
         pages.home_page.navi_to_homepage()
-        pages.login_page.login_action(login_data)
+        pages.login_page.login_all_users(login_data)

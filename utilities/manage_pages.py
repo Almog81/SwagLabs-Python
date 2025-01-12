@@ -12,5 +12,7 @@ def pages(driver):
             self.home_page = HomePage(driver)
             self.login_page = LoginPage(driver)
             self.create_user_page = CreateUserPage(driver)
+            self.login_page.home_page = self.home_page
+            self.home_page.login_page = self.login_page
 
     return Pages(driver)
