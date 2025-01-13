@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from utilities.manage_pages import *
 from utilities.ui_actions import UiActions
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 
@@ -40,3 +41,7 @@ class LoginPage(UiActions):
                 assert load_time >= max_load_time, f"Page load time is too long: {load_time:.2f} seconds"
         if type_of_user == "locked_out":
             assert self.is_element_visible(self.elm_errorMassage), f"Login failed: {self.get_text(self.elm_errorMassage)}"
+
+    def safe_login(self):
+        self.home_page.navi_to_homepage()
+        self.login_action(read_from_json("loginData.json")[0])
