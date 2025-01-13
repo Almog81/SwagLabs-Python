@@ -1,0 +1,22 @@
+{
+  "devices": {
+    "OnePlus3": {
+      "platformName": "Android",
+      "platformVersion": "9",
+      "UDID": "faab4e1b",
+      "automationName": "UiAutomator2",
+      "appPackage": "com.swaglabsmobileapp",
+      "appActivity": ".MainActivity",
+      "appWaitActivity": "*"
+    },
+    "iPone10": {
+      "platformName": "iOS",
+      "platformVersion": "15",
+      "UDID": "12345abc",
+      "automationName": "XCUITest",
+      "appPackage": "com.swaglabsmobileapp",
+      "appActivity": ".HomeActivity",
+      "appWaitActivity": "*"
+    }
+  }
+}

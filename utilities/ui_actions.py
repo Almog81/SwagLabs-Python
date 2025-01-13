@@ -1,8 +1,10 @@
 from selenium.common import TimeoutException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from utilities.common_ops import driver
-
+from appium.webdriver.webdriver import WebDriver as AppiumWebDriver
+from selenium.webdriver.support.select import Select
 
 class UiActions:
     def __init__(self, driver, wait_time=10):
@@ -11,9 +13,14 @@ class UiActions:
 
     def wait_for_page_load(self, timeout=30):
         try:
-            WebDriverWait(self.driver, timeout).until(
-                lambda driver: self.driver.execute_script("return document.readyState") == "complete"
-            )
+            if isinstance(self.driver, AppiumWebDriver):  # For mobile tests
+                WebDriverWait(self.driver, timeout).until(
+                    lambda driver: driver.current_activity is not None and driver.current_activity != ''
+                )
+            else:  # For web tests
+                WebDriverWait(self.driver, timeout).until(
+                    lambda driver: driver.execute_script("return document.readyState") == "complete"
+                )
         except TimeoutException:
             raise TimeoutException("The page did not load completely within the timeout period.")
 
@@ -28,8 +35,17 @@ class UiActions:
         self.wait_for_page_load()
 
     def drop_down_select(self, locator, text):
-        field = self.wait.until(EC.visibility_of_element_located(locator))
-        field.send_keys(text)
+        element = self.wait.until(EC.visibility_of_element_located(locator))
+
+        if isinstance(self.driver, AppiumWebDriver):
+            element.click()
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, f"//*[@text='{text}']"))).click()
+            return
+
+        try:
+            Select(element).select_by_visible_text(text)
+        except:
+            element.send_keys(text)
 
     def is_element_visible(self, locator):
         self.wait_for_page_load()
@@ -58,3 +74,7 @@ class UiActions:
         load_event_end = self.driver.execute_script("return window.performance.timing.loadEventEnd")
         load_time = (load_event_end - navigation_start) / 1000  # Convert to seconds
         return load_time
+
+    def get_elements_by_locator(self, locator):
+        self.is_element_visible(locator)
+        return self.driver.find_elements(*locator)
