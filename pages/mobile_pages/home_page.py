@@ -1,3 +1,4 @@
+from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from utilities.ui_actions import UiActions
@@ -15,15 +16,15 @@ class HomePage(UiActions):
     # Locators
     img_logo = (By.CLASS_NAME, "app_logo")
 
-    elm_product_label = (By.XPATH, "//*[@text=\"PRODUCTS\"]")
+    elm_product_label = (AppiumBy.ANDROID_UIAUTOMATOR, "new UiSelector().text(\"PRODUCTS\")")
     img_inventory_item = (By.CLASS_NAME, "android.widget.ImageView")
-    elm_cart = (By.XPATH, "//*[@content-desc=\"test-Cart\"]")
+    elm_cart = (AppiumBy.ACCESSIBILITY_ID, "test-Cart")
 
-    select_filter = (By.XPATH, "//*[@content-desc=\"test-Modal Selector Button\"]")
+    select_filter = (AppiumBy.ACCESSIBILITY_ID, "test-Modal Selector Button")
     btn_add_to_cart = (By.XPATH, "(//*[@text=\"ADD TO CART\"])")
 
-    btn_menu = (By.XPATH, "//*[@content-desc=\"test-Menu\"]")
-    btn_logout = (By.XPATH, "//*[@content-desc=\"test-LOGOUT\"]")
+    btn_menu = (AppiumBy.ACCESSIBILITY_ID, "test-Menu")
+    btn_logout = (AppiumBy.ACCESSIBILITY_ID, "test-LOGOUT")
 
     # Actions
     def is_logo_displayed(self):

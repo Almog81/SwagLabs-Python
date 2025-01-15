@@ -1,3 +1,4 @@
+from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.common.by import By
 from utilities.manage_mobile_pages import *
 from utilities.ui_actions import UiActions
@@ -12,10 +13,10 @@ class LoginPage(UiActions):
         self.home_page = None
 
     # Locators
-    txt_username = (By.XPATH, "//*[@content-desc=\"test-Username\"]")
-    txt_password = (By.XPATH, "//*[@content-desc=\"test-Password\"]")
-    btn_login = (By.XPATH, "//*[@text=\"LOGIN\"]")
-    elm_errorMassage = (By.XPATH, "//*[@content-desc=\"test-Error message\"]")
+    txt_username = (AppiumBy.ACCESSIBILITY_ID, "test-Username")
+    txt_password = (AppiumBy.ACCESSIBILITY_ID, "test-Password")
+    btn_login = (AppiumBy.ACCESSIBILITY_ID, "test-LOGIN")
+    elm_errorMassage = (AppiumBy.ACCESSIBILITY_ID, "test-Error message")
 
 
     def login_action(self,  login_data):
